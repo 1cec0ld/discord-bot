@@ -10,14 +10,12 @@ class DiscordGame {
     this.channel = msg.channel;
     this.player = msg.author;
     this.initBotMessage(this.channel, this.player);
-    this.initBotListeners(bot, msg);
-  }
-  playGame(input) {
-    // console.log(this.game.toString());
+    this.initBotListeners(bot);
   }
 
-  initBotListeners(bot, msg) {
+  initBotListeners(bot) {
     const reactionListener = (reaction, user) => {
+      if (reaction.message.id != this.messageId) return;
       if (user == this.player) {
         this.channel.send('the right user sent a reaction!');
       } else {
@@ -32,14 +30,13 @@ class DiscordGame {
     if (this.messageId == null) {
       this.messageId = await channel.send(
           messageContent(this.game));
-      this.channel.send('The ID is ' + this.messageId);
     }
   }
 }
 
 
 function messageContent(game) {
-  let output = 'Let\'s play!\n';
+  let output = 'Let\'s play!\n```';
   for (let i = 0; i < game.board.length; i++) {
     output += ((game.board[i] == game.BLANK) ?
               UNICODE_SQUARE :
@@ -48,7 +45,7 @@ function messageContent(game) {
       output += '\n';
     }
   }
-  return output;
+  return output+'```';
 }
 
 module.exports = DiscordGame;

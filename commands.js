@@ -21,8 +21,9 @@ validCommands['!date'] = (obj) => {
 };
 
 validCommands['!ttt'] = (obj) => {
-  const tictactoe = new TicTacToe(obj);
-  tictactoe.playGame('');
+  // to-do: test multiple games at once
+  const tictactoe = [];
+  tictactoe[obj.msg.author.id] = new TicTacToe(obj);
 };
 
 module.exports = validCommands;
