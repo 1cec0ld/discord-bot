@@ -9,6 +9,8 @@
   "author": "Michiel Mulders",
   "license": "ISC",
   "dependencies": {
+    "chrono-node": "^2.3.2",
+    "discord.js": "^13.1.0",
     "dotenv": "^8.6.0"
   }
 }
