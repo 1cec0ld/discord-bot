@@ -90,6 +90,6 @@ class Game {
       }
 
     cat(){
-        return !this.board.filter((val) => val == this.BLANK).length;
+        return !this.board.some((val) => val == this.BLANK);
     }
 }
