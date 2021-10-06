@@ -27,7 +27,7 @@ class Game {
       } else {
         output += '.' + ' ';
       }
-      if (!((i - 2) % this.size)) {
+      if (!((i + 1) % this.size)) {
         output += '\n';
       }
     }
@@ -57,14 +57,14 @@ class Game {
       const start = i * this.size;
       const end = (i + 1) * this.size;
       slice = this.board.slice(start, end);
-      if (this.inARow(...slice)) return slice[0];
+      if (this.inARow(...slice) == true) return this.charSet[slice[0]];
     }
     // vertical
     for (let j = 0; j < this.size; j++) {
       slice = [];
       for (let i = 0; i < this.size; i++) {
         slice.push(this.board[j + (i * (this.size - 1) + i)]);
-        if (this.inARow(...slice)) return slice[0];
+        if (this.inARow(...slice)) return this.charSet[slice[0]];
       }
     }
     // diagonal right
@@ -73,15 +73,14 @@ class Game {
       const index = i * this.size + i;
       slice.push(this.board[index]);
     }
-    if (this.inARow(...slice)) return slice[0];
+    if (this.inARow(...slice)) return this.charSet[slice[0]];
     // diagonal left
     slice = [];
     for (let i = 0; i < this.size; i++) {
       const index = (i + 1) * this.size - i - 1;
-
       slice.push(this.board[index]);
     }
-    if (this.inARow(...slice)) return slice[0];
+    if (this.inARow(...slice)) return this.charSet[slice[0]];
     return false;
   }
 
@@ -96,6 +95,5 @@ class Game {
     return !this.board.some((val) => val == this.BLANK);
   }
 }
-
 
 module.exports = Game;
