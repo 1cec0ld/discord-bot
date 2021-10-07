@@ -1,6 +1,7 @@
 const dateCommand = require('./date/dateCommand');
-const TicTacToe = require('./games/tictactoe/discordgame');
+const TicTacToeMaker = require('./games/tictactoe/gamemaker');
 const validCommands = {};
+const tictactoe = [];
 
 validCommands['!leave'] = (obj) => {
   obj.bot.destroy();
@@ -21,9 +22,7 @@ validCommands['!date'] = (obj) => {
 };
 
 validCommands['!ttt'] = (obj) => {
-  // to-do: test multiple games at once
-  const tictactoe = [];
-  tictactoe[obj.msg.author.id] = new TicTacToe(obj);
+  tictactoe[obj.msg.author.id] = new TicTacToeMaker(obj.bot, obj.msg);
 };
 
 module.exports = validCommands;
